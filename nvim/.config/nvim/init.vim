@@ -18,13 +18,13 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-"Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
 "Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'mortepau/codicons.nvim'
 
-" Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/completion-nvim'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 
@@ -43,10 +43,10 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
 " Java
-Plug 'mfussenegger/nvim-jdtls'
+" Plug 'mfussenegger/nvim-jdtls'
 
 " Kotlin
-Plug 'udalov/kotlin-vim' 
+" Plug 'udalov/kotlin-vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
@@ -77,7 +77,15 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " prettier
 Plug 'sbdchd/neoformat'
+Plug 'windwp/nvim-ts-autotag'
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
+
+" Comment
+Plug 'numToStr/Comment.nvim'
+
+" Statusline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " these two plugins will add highlighting and indenting to JSX and TSX files.
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
@@ -85,9 +93,11 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for
 call plug#end()
 
 lua require("marshar")
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }, autotag = { enable = true } }
 
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-kotlin']  " list of CoC extensions needed
+
+lua require('Comment').setup()
 
 let mapleader = " "
 
@@ -97,9 +107,6 @@ snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
 snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 
 nnoremap <silent> Q <nop>
-
-nnoremap - :Ex<CR>
-nnoremap <Leader>pv :Ex<CR>
 
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
