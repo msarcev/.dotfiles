@@ -32,7 +32,7 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'nerdtree-visual-selection'
+" Plug 'nerdtree-visual-selection'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
