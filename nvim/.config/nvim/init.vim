@@ -20,11 +20,10 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
-"Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'mortepau/codicons.nvim'
 
-Plug 'nvim-lua/completion-nvim'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 

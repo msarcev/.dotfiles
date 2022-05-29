@@ -1,40 +1,48 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- Setup nvim-cmp.
+-- setup nvim-cmp.
 local cmp = require("cmp")
 local source_mapping = {
 	buffer = "[Buffer]",
 	nvim_lsp = "[LSP]",
 	nvim_lua = "[Lua]",
-	cmp_tabnine = "[TN]",
+	cmp_tabnine = "[T9]",
 	path = "[Path]",
+    treesitter = '[TS]'
 }
 
 local lspkind = require("lspkind")
 require("lspkind").init({
-    -- TODO FIX this
-    -- DEPRECATED (use mode instead): enables text annotations
-    --
-    -- default: true
-    -- with_text = true,
-
-    -- defines how annotations are shown
-    -- default: symbol
-    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
     mode = 'symbol_text',
-  --  mode = 'text',
-
-    -- default symbol map
-    -- can be either 'default' (requires nerd-fonts font) or
-    -- 'codicons' for codicon preset (requires vscode-codicons font)
-    --
-    -- default: 'default'
     preset = 'codicons',
-
-    -- override preset symbols
-    --
-    -- default: {}
+    symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+    },
 })
 
 cmp.setup({
@@ -50,55 +58,49 @@ cmp.setup({
 			-- vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
-	mapping = {
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-	},
+    -- confirmation = {
+    --     default_behavior = cmp.ConfirmBehavior.Replace,
+    -- },
+    mapping = {
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        }),
+        ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 'c' }),
+        ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 'c' }),
+    },
 
-	formatting = {
-		format = function(entry, vim_item)
-			vim_item.kind = lspkind.presets.default[vim_item.kind]
-			local menu = source_mapping[entry.source.name]
-			if entry.source.name == "cmp_tabnine" then
-				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-					menu = entry.completion_item.data.detail .. " " .. menu
-				end
-				vim_item.kind = ""
-			end
-			vim_item.menu = menu
-			return vim_item
-		end,
-	},
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.kind = lspkind.symbolic(vim_item.kind, { with_text = false })
+            local menu = source_mapping[entry.source.name] or ('[' .. entry.source.name .. ']')
+            if entry.source.name == 'cmp_tabnine' then
+                if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+                    menu = menu .. ' ' .. entry.completion_item.data.detail
+                end
+                vim_item.kind = ''
+            end
+            vim_item.menu = menu
+            return vim_item
+        end,
+    },
 
 	sources = {
-		-- tabnine completion? yayaya
-
 		{ name = "cmp_tabnine" },
-
 		{ name = "nvim_lsp" },
-
-		-- For vsnip user.
-		-- { name = 'vsnip' },
-
-		-- For luasnip user.
 		{ name = "luasnip" },
-
-		-- For ultisnips user.
-		-- { name = 'ultisnips' },
-
 		{ name = "buffer" },
 	},
 })
 
---local tabnine = require("cmp_tabnine.config")
---tabnine:setup({
---	max_lines = 1000,
---	max_num_results = 20,
---	sort = true,
---	run_on_every_keystroke = true,
---	snippet_placeholder = "..",
---})
+local tabnine = require("cmp_tabnine.config")
+tabnine:setup({
+    max_lines = 1000,
+    max_num_results = 20,
+    sort = true,
+    run_on_every_keystroke = true,
+    snippet_placeholder = "..",
+})
 
 local function config(_config)
 	return vim.tbl_deep_extend("force", {
@@ -107,16 +109,6 @@ local function config(_config)
 end
 
 require("lspconfig").tsserver.setup(config())
-
---[[  I cannot seem to get this woring on new computer..
-require("lspconfig").clangd.setup(config({
-	cmd = { "clangd", "--background-index", "--log=verbose" },
-    root_dir = function()
-        print("clangd-Rootdir", vim.loop.cwd())
-		return vim.loop.cwd()
-	end,
-}))
---]]
 
 require("lspconfig").gopls.setup(config({
 	cmd = { "gopls", "serve" },
@@ -132,16 +124,8 @@ require("lspconfig").gopls.setup(config({
 
 require("lspconfig").rust_analyzer.setup(config({
 	cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-	--[[
-    settings = {
-        rust = {
-            unstable_features = true,
-            build_on_save = false,
-            all_features = true,
-        },
-    }
-    --]]
 }))
+
 require('rust-tools').setup({})
 
 require'lspconfig'.jdtls.setup{ cmd = { 'jdtls' } }
