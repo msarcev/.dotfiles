@@ -31,7 +31,7 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'nerdtree-visual-selection'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -86,15 +86,10 @@ Plug 'numToStr/Comment.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" these two plugins will add highlighting and indenting to JSX and TSX files.
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
-
 call plug#end()
 
 lua require("marshar")
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }, autotag = { enable = true } }
-
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-kotlin']  " list of CoC extensions needed
 
 lua require('Comment').setup()
 
