@@ -20,11 +20,10 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
-Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'mortepau/codicons.nvim'
 
-Plug 'glepnir/lspsaga.nvim'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'simrat39/symbols-outline.nvim'
 
 " NERDtree
@@ -42,10 +41,10 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
 " Java
-" Plug 'mfussenegger/nvim-jdtls'
+Plug 'mfussenegger/nvim-jdtls'
 
 " Kotlin
-" Plug 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
@@ -86,6 +85,9 @@ Plug 'numToStr/Comment.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Activity watcher
+Plug 'ActivityWatch/aw-watcher-vim'
+
 call plug#end()
 
 lua require("marshar")
@@ -120,16 +122,4 @@ nnoremap <leader>k :m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
 
 inoremap <C-q> <esc>
-lua << EOF
-
-local saga = require'lspsaga'
-
-saga.init_lsp_saga {
-  error_sign = '',
-  warn_sign = '',
-  hint_sign = '',
-  infor_sign = '',
-  border_style = "round",
-}
-EOF
 
