@@ -13,7 +13,7 @@ set wildignore+=**/.git/*
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Plebvim lsp Plugins
+" Lsp Plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -66,12 +66,16 @@ Plug 'junegunn/gv.vim'
 " Coloscheme
 Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Harpoon
+Plug 'ThePrimeagen/harpoon'
 
 " prettier
 Plug 'sbdchd/neoformat'
@@ -120,6 +124,9 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>k :m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
+
+nnoremap <leader>m :Neoformat<CR>
+vnoremap <leader>m :Neoformat<CR>
 
 inoremap <C-q> <esc>
 

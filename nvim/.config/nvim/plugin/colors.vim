@@ -1,4 +1,12 @@
-let g:marshar_colorscheme = "gruvbox"
+" latte, frappe, macchiato, mocha
+let g:catppuccin_flavour = "macchiato"
+
+lua << EOF
+require("catppuccin").setup()
+EOF
+
+let g:marshar_colorscheme = "catppuccin"
+
 fun! ColorMyPencils()
     let g:gruvbox_contrast_dark = 'hard'
     if exists('+termguicolors')

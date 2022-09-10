@@ -86,10 +86,10 @@ cmp.setup({
     },
 
 	sources = {
-		{ name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
+        { name = "cmp_tabnine" },
+        { name = "buffer" },
 		{ name = "luasnip" },
-		{ name = "buffer" },
 	},
 })
 
