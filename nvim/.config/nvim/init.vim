@@ -114,6 +114,9 @@ nnoremap <Leader>rp :resize 100<CR>
 
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
+" better pasta
+xnoremap <leader>p "_dP<CR>
+
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
