@@ -1,5 +1,6 @@
 :let g:NERDTreeWinSize=30
 :let g:NERDTreeShowHidden=1
+:let g:NERDTreeMinimalMenu=1
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
