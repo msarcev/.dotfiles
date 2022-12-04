@@ -122,6 +122,9 @@ nnoremap N Nzzzv
 nnoremap J mzJ`z
 nnoremap Y yg$
 
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " Moving text
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
