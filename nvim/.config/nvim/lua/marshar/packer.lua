@@ -49,5 +49,11 @@ return require('packer').startup(function(use)
   use('sbdchd/neoformat')
   use('windwp/nvim-ts-autotag')
   use('jiangmiao/auto-pairs')
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
 end)
 
