@@ -55,5 +55,8 @@ return require('packer').startup(function(use)
           require('Comment').setup()
       end
   }
+
+  -- zen mode
+  use("folke/zen-mode.nvim")
 end)
 
