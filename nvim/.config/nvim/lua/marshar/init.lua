@@ -1,3 +1,4 @@
+require("marshar.packer")
 require("marshar.remap")
 require("marshar.set")
 require("marshar.netrw")
