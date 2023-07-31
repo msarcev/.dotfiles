@@ -28,3 +28,5 @@ vim.keymap.set("v", "<leader>m", ":Neoformat<CR>")
 
 vim.keymap.set("i", "<C-q>", "<esc>")
 
+-- exit
+vim.keymap.set("n", "<leader>q", ":qa<CR>")
