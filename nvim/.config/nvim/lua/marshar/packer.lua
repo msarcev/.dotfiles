@@ -6,8 +6,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
-	  -- or                            , branch = '0.1.x',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -60,5 +59,14 @@ return require('packer').startup(function(use)
 
   -- zen mode
   use("folke/zen-mode.nvim")
+
+  -- obsidian
+  use {
+      "epwalsh/obsidian.nvim",
+      requires = {
+          -- Required.
+          "nvim-lua/plenary.nvim"
+      }
+  }
 end)
 
