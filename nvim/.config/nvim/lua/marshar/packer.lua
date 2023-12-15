@@ -68,5 +68,8 @@ return require('packer').startup(function(use)
           "nvim-lua/plenary.nvim"
       }
   }
+
+  -- copilot
+  use('github/copilot.vim')
 end)
 
