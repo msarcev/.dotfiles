@@ -1,3 +1,6 @@
+vim.opt.termguicolors = true
+vim.cmd.colorscheme 'melange'
+
 function Colorize(color)
 	color = color or "rose-pine"
 
@@ -6,7 +9,4 @@ function Colorize(color)
 end
 
 Colorize()
-
-vim.opt.termguicolors = true
-vim.cmd.colorscheme 'melange'
 
