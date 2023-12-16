@@ -33,10 +33,14 @@ cmp.setup({
     {name = 'copilot'},
 
     --- These are the default sources for lsp-zero
-    {name = 'path'},
+    -- {name = 'path'},
     {name = 'nvim_lsp', keyword_length = 3},
-    {name = 'buffer', keyword_length = 3},
+    -- {name = 'buffer', keyword_length = 3},
     {name = 'luasnip', keyword_length = 2},
+  },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
   },
   mapping = lsp_zero.defaults.cmp_mappings({
     ['<CR>'] = cmp.mapping.confirm({
