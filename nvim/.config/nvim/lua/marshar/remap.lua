@@ -28,5 +28,8 @@ vim.keymap.set("v", "<leader>m", ":Neoformat<CR>")
 
 vim.keymap.set("i", "<C-q>", "<esc>")
 
+-- sub word
+vim.keymap.set("n", "<Leader>vs", [[:%s/<C-r><C-w>//g<Left><Left>]])
+
 -- exit
 vim.keymap.set("n", "<leader>q", ":qa<CR>")

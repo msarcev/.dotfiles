@@ -28,5 +28,7 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "121"
+vim.opt.colorcolumn = "141"
 
+-- obsidian vim fix (?)
+vim.opt.conceallevel = 2
