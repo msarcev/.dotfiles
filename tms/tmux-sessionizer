@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/Code ~/Code/iota ~/Code/crates ~/.config -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+setup_iota_monorepo_session() {
+    local session_name=$1
+    local path=$2
+
+    # Create main window and set working directory
+    tmux new-session -ds $session_name -c "$path/develop"
+    # Rename the session to "do"
+    tmux rename-session -t $session_name "do"
+
+    tmux rename-window -t do:1 'any'
+
+    tmux send-keys -t $do:1 'git status' Enter
+
+    # Create additional windows with specific paths
+    tmux new-window -t do:2 -n 'thing' -c "$path/work1"
+    tmux new-window -t do:3 -n 'edit' -c "$path/develop"
+
+    tmux send-keys -t $do:3 'nvim' Enter
+
+    # Create additional sessions with their own paths
+    tmux new-session -ds "runin" -c "$path"
+    tmux new-session -ds "crates" -c "$path"
+}
+
+setup_simple_session() {
+    local session_name=$1
+    local path=$2
+
+    # Create main window and set working directory
+    tmux new-session -ds $session_name -c "$path"
+    tmux rename-window -t $session_name:1 'any'
+
+    tmux send-keys -t $session_name:1 'git status' Enter
+
+    # Create additional windows with specific paths
+    tmux new-window -t $session_name:2 -n 'thing' -c "$path"
+    tmux new-window -t $session_name:3 -n 'edit' -c "$path"
+
+    tmux send-keys -t $session_name:3 'nvim' Enter
+}
+
+# First check if session exists and create if needed
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    if [[ $selected_name == "kinesis_git" ]]; then
+        setup_iota_monorepo_session $selected_name $selected
+        selected_name="do"  # If you want to rename kinesis_git to do
+    elif [[ $selected_name == "flexoswarm" ]]; then
+        setup_simple_session $selected_name $selected
+    else
+        tmux new-session -ds $selected_name -c "$selected"
+        tmux send-keys -t $selected_name:1 'nvim' Enter
+    fi
+fi
+
+# Then handle connection based on whether we're in tmux or not
+if [[ -n "$TMUX" ]]; then
+    # Inside tmux: switch to the session
+    tmux switch-client -t $selected_name
+else
+    # Outside tmux: attach to session
+    tmux attach-session -t $selected_name
+fi
+
