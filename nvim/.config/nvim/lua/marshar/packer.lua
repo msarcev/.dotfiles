@@ -70,8 +70,8 @@ return require('packer').startup(function(use)
       event = "InsertEnter",
       config = function()
           require("copilot").setup({
-              suggestion = { enabled = false },
-              panel = { enabled = false },
+              suggestion = { enabled = true },
+              panel = { enabled = true },
               copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v18.1.0/bin/node',
           })
       end,
