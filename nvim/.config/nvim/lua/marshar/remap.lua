@@ -19,7 +19,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- copy clipboard
 vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>y", "\"+yg_")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>yy", "\"+yy")
 

@@ -36,6 +36,12 @@ return require('packer').startup(function(use)
       }
   }
 
+  -- move sui syntax highlighting
+  use {
+      'yanganto/move.vim',
+      branch = 'sui-move'
+  }
+
   use {
       'nvim-lualine/lualine.nvim',
       requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -43,7 +49,12 @@ return require('packer').startup(function(use)
 
   use('sbdchd/neoformat')
   use('windwp/nvim-ts-autotag')
-  use('jiangmiao/auto-pairs')
+  use {
+      'windwp/nvim-autopairs',
+      config = function()
+          require('nvim-autopairs').setup({})
+      end
+  }
   use {
       'numToStr/Comment.nvim',
       config = function()
@@ -61,6 +72,14 @@ return require('packer').startup(function(use)
           -- Required.
           "nvim-lua/plenary.nvim"
       }
+  }
+
+  -- which-key for keybinding discovery
+  use {
+      "folke/which-key.nvim",
+      config = function()
+          require("which-key").setup({})
+      end
   }
 
   -- copilot

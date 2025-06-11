@@ -18,7 +18,7 @@ setup_iota_monorepo_session() {
     local path=$2
 
     # Create main window and set working directory
-    tmux new-session -ds $session_name -c "$path/develop"
+    tmux new-session -ds $session_name -c "$path/dev"
     # Rename the session to "do"
     tmux rename-session -t $session_name "do"
 
@@ -27,8 +27,8 @@ setup_iota_monorepo_session() {
     tmux send-keys -t $do:1 'git status' Enter
 
     # Create additional windows with specific paths
-    tmux new-window -t do:2 -n 'thing' -c "$path/work1"
-    tmux new-window -t do:3 -n 'edit' -c "$path/develop"
+    tmux new-window -t do:2 -n 'thing' -c "$path/dev"
+    tmux new-window -t do:3 -n 'edit' -c "$path/dev"
 
     tmux send-keys -t $do:3 'nvim' Enter
 

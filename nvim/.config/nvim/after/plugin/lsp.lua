@@ -59,6 +59,7 @@ vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "<leader>vd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
@@ -77,3 +78,13 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
+-- move-analyzer for Sui
+local lspconfig = require('lspconfig')
+lspconfig.move_analyzer.setup({
+    cmd = { os.getenv("HOME") .. "/.cargo/bin/move-analyzer" },
+    filetypes = { "move" },
+    root_dir = lspconfig.util.root_pattern("Move.toml", ".git"),
+    -- Optional: add any additional settings you need
+    on_attach = lsp_zero.on_attach, -- Use lsp-zero's on_attach if you have one
+    capabilities = lsp_zero.get_capabilities(), -- Use lsp-zero's capabilities
+})
