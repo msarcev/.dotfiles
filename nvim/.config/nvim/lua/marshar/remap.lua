@@ -44,3 +44,7 @@ vim.keymap.set("n", "<Leader>vs", [[:%s/<C-r><C-w>//g<Left><Left>]])
 
 -- exit
 vim.keymap.set("n", "<leader>q", ":qa<CR>")
+
+-- Claude Code integration
+vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.cmd('ClaudeCode ' .. vim.fn.expand('%'))<CR>", { desc = "Send current file to Claude" })
+vim.keymap.set("n", "<leader>cl", "<cmd>ClaudeCode<CR>", { desc = "Open Claude Code" })

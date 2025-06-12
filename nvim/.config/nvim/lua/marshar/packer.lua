@@ -103,5 +103,28 @@ return require('packer').startup(function(use)
           require('copilot_cmp').setup()
       end
   }
+
+  -- claude-code.nvim integration
+  use {
+      'greggh/claude-code.nvim',
+      requires = {
+          'nvim-lua/plenary.nvim', -- Git operations
+      },
+      config = function()
+          require('claude-code').setup({
+              window = {
+                  split_ratio = 0.3,
+                  position = "botright",
+                  enter_insert = true
+              },
+              command = "claude",
+              command_variants = {
+                  continue = "--continue",
+                  resume = "--resume",
+                  verbose = "--verbose"
+              }
+          })
+      end
+  }
 end)
 
