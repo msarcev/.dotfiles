@@ -7,7 +7,6 @@ lspconfig.lua_ls.setup({
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using
                 version = 'LuaJIT',
             },
             diagnostics = {
@@ -19,7 +18,6 @@ lspconfig.lua_ls.setup({
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
             },
-            -- Do not send telemetry data
             telemetry = {
                 enable = false,
             },
@@ -37,11 +35,7 @@ require('mason-lspconfig').setup({
         'svelte',
         'jdtls'
     },
-    handlers = {
-        lsp_zero.default_setup,
-        -- Skip lua_ls since we configured it above
-        lua_ls = function() end,
-    },
+    automatic_enable = true
 })
 
 cmp.setup({
