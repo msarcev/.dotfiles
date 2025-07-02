@@ -1,6 +1,32 @@
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 
+-- Configure lua_ls before anything else
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup({
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
+            -- Do not send telemetry data
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+})
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -11,20 +37,11 @@ require('mason-lspconfig').setup({
         'svelte',
         'jdtls'
     },
-  handlers = {
-    lsp_zero.default_setup,
-  },
-})
-
--- Fix for undefined global 'vim'
-lsp_zero.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
+    handlers = {
+        lsp_zero.default_setup,
+        -- Skip lua_ls since we configured it above
+        lua_ls = function() end,
+    },
 })
 
 cmp.setup({
