@@ -1,20 +1,21 @@
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 
--- Configure lua_ls before anything else
 local lspconfig = require('lspconfig')
+
+-- Pre-configure lua_ls to avoid the vim global warning
 lspconfig.lua_ls.setup({
+    on_attach = lsp_zero.on_attach,
+    capabilities = lsp_zero.get_capabilities(),
     settings = {
         Lua = {
             runtime = {
                 version = 'LuaJIT',
             },
             diagnostics = {
-                -- Get the language server to recognize the `vim` global
                 globals = { 'vim' },
             },
             workspace = {
-                -- Make the server aware of Neovim runtime files
                 library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
             },
@@ -35,7 +36,17 @@ require('mason-lspconfig').setup({
         'svelte',
         'jdtls'
     },
-    automatic_enable = true
+    handlers = {
+        -- Default handler for all servers
+        function(server_name)
+            lspconfig[server_name].setup({
+                on_attach = lsp_zero.on_attach,
+                capabilities = lsp_zero.get_capabilities(),
+            })
+        end,
+        -- Skip lua_ls since we configured it above
+        ['lua_ls'] = function() end,
+    },
 })
 
 cmp.setup({
@@ -44,10 +55,10 @@ cmp.setup({
     {name = 'copilot'},
 
     --- These are the default sources for lsp-zero
-    -- {name = 'path'},
-    {name = 'nvim_lsp', keyword_length = 3},
-    -- {name = 'buffer', keyword_length = 3},
+    {name = 'nvim_lsp'},
     {name = 'luasnip', keyword_length = 2},
+    {name = 'path'},
+    {name = 'buffer', keyword_length = 3},
   },
   window = {
       completion = cmp.config.window.bordered(),
@@ -65,7 +76,7 @@ cmp.setup({
 
 -- Looks of cmp window
 vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpItemAbbrMatch' })
 
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
