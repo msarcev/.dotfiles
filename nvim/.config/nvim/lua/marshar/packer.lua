@@ -26,7 +26,10 @@ return require('packer').startup(function(use)
   -- Autocompletion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
   use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
 
   -- move sui syntax highlighting
   use {
@@ -81,9 +84,9 @@ return require('packer').startup(function(use)
       event = "InsertEnter",
       config = function()
           require("copilot").setup({
-              suggestion = { enabled = true },
+              suggestion = { enabled = false },
               panel = { enabled = true },
-              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v20.17.0/bin/node',
+              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v22.21.0/bin/node',
           })
       end,
   }
