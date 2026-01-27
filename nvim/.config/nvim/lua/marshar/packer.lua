@@ -6,14 +6,18 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
+	  'nvim-telescope/telescope.nvim', tag = 'v0.2.1',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
   -- theme
   use "savq/melange-nvim"
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      branch = 'main',
+      run = ':TSUpdate'
+  }
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
@@ -86,7 +90,7 @@ return require('packer').startup(function(use)
           require("copilot").setup({
               suggestion = { enabled = false },
               panel = { enabled = true },
-              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v22.22.0/bin/node',
+              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v22.21.0/bin/node',
           })
       end,
   }
