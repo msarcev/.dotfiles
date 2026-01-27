@@ -1,5 +1,10 @@
--- Disable automatic clipboard integration to prevent wl-clipboard spam
-vim.opt.clipboard = ""
+-- macOS: enable clipboard integration (works fine)
+-- Linux: disable to prevent wl-clipboard spam
+if vim.fn.has('mac') == 1 then
+  vim.opt.clipboard = "unnamedplus"
+else
+  vim.opt.clipboard = ""
+end
 
 -- Manual clipboard commands if you need them
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
