@@ -26,3 +26,4 @@ autocmd({"BufWritePre"}, {
     command = "%s/\\s\\+$//e",
 })
 
+require('marshar.clipboard')

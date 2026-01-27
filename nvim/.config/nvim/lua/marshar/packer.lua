@@ -86,7 +86,7 @@ return require('packer').startup(function(use)
           require("copilot").setup({
               suggestion = { enabled = false },
               panel = { enabled = true },
-              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v22.21.0/bin/node',
+              copilot_node_command = vim.fn.expand("$HOME") .. '/.nvm/versions/node/v22.22.0/bin/node',
           })
       end,
   }

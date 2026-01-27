@@ -1,3 +1,29 @@
+local telescope = require('telescope')
+local actions = require('telescope.actions')
+
+-- Setup telescope to show hidden files
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+      find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" },
+    },
+    live_grep = {
+        additional_args = function()
+            return { "--hidden", "--glob", "!.git/*" }
+        end,
+    },
+  },
+})
+
 local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

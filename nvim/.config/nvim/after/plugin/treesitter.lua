@@ -1,27 +1,12 @@
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "help", "javascript", "typescript", "c", "lua", "rust", "python" },
+-- nvim-treesitter 1.0+ config (requires Neovim 0.11+)
+local ts = require('nvim-treesitter')
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Install parsers (async, no-op if already installed)
+ts.install({ 'javascript', 'typescript', 'c', 'lua', 'rust', 'python', 'vimdoc' })
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  -- Requires windwp/nvim-ts-autotag - Automatically close html tags
-  autotag = {
-    enable = true,
-  }
-}
-
+-- Enable treesitter highlighting for supported filetypes
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
