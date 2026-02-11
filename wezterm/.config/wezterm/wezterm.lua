@@ -13,6 +13,7 @@ config.color_scheme = 'Catppuccin Mocha'
 config.use_dead_keys = false
 config.adjust_window_size_when_changing_font_size = false
 config.hide_tab_bar_if_only_one_tab = true
+
 -- BACKGROUND
 local dimmer = { brightness = 0.1 }
 config.background = {
@@ -21,13 +22,15 @@ config.background = {
             File = '/Users/marshar/bg_1.jpg',
         },
         width = '100%',
-        repeat_x = 'Mirror',
+        repeat_x = 'NoRepeat',
         hsb = dimmer,
-        attachment = { Parallax = 5 },
+        -- attachment = { Parallax = 5 },
+        attachment = 'Fixed',
     }
 }
 config.window_frame = {
- font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
+    font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
 }
 
 return config
+
