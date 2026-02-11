@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 vim.keymap.set("n", "<C-f>", vim.cmd.Vex)
 
 vim.keymap.set("n", "<Leader>+", ":vertical resize +5<CR>")
@@ -34,9 +32,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>k", ":m .-2<CR>==")
 vim.keymap.set("n", "<leader>j", ":m .+1<CR>==")
 
-vim.keymap.set("n", "<leader>m", ":Neoformat<CR>")
-vim.keymap.set("v", "<leader>m", ":Neoformat<CR>")
-
 vim.keymap.set("i", "<C-q>", "<esc>")
 
 -- sub word
@@ -44,7 +39,3 @@ vim.keymap.set("n", "<Leader>vs", [[:%s/<C-r><C-w>//g<Left><Left>]])
 
 -- exit
 vim.keymap.set("n", "<leader>q", ":qa<CR>")
-
--- Claude Code integration
-vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.cmd('ClaudeCode ' .. vim.fn.expand('%'))<CR>", { desc = "Send current file to Claude" })
-vim.keymap.set("n", "<leader>cl", "<cmd>ClaudeCode<CR>", { desc = "Open Claude Code" })
