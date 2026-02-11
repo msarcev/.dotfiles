@@ -9,6 +9,12 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
+      -- Diagnostic config (noice.nvim handles hover/signature)
+      vim.diagnostic.config({
+        virtual_text = true,
+        float = { border = "rounded" },
+      })
+
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -73,8 +79,6 @@ return {
           vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
         end,
       })
-
-      vim.diagnostic.config({ virtual_text = true })
     end,
   },
 

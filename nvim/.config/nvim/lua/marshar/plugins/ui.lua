@@ -11,7 +11,8 @@ return {
       function Colorize(color)
         color = color or 'melange'
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#292522" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#867462", bg = "#292522" })
       end
 
       Colorize()
@@ -68,6 +69,42 @@ return {
         extensions = {}
       }
     end,
+  },
+
+  -- Noice - better UI for messages, cmdline, and popups
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          background_colour = "#292522",
+        },
+      },
+    },
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        hover = {
+          enabled = true,
+        },
+        signature = {
+          enabled = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        lsp_doc_border = true,
+      },
+    },
   },
 
   -- Zen mode
