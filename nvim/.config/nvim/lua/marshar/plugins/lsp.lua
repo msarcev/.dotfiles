@@ -115,8 +115,16 @@ return {
           { name = 'buffer', keyword_length = 3 },
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered({
+            border = "double",
+            side_padding = 1,
+            winhighlight = "Normal:NoicePopup,FloatBorder:NoicePopupBorder,CursorLine:PmenuSel,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            border = "double",
+            side_padding = 1,
+            winhighlight = "Normal:NoicePopup,FloatBorder:NoicePopupBorder,CursorLine:PmenuSel,Search:None",
+          }),
         },
         mapping = cmp.mapping.preset.insert({
           ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
