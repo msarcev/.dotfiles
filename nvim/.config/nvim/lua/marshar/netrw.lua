@@ -7,11 +7,10 @@ vim.g.netrw_winsize = 25
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-local ProjectDrawer = augroup('ProjectDrawer', {})
+local ProjectDrawer = augroup("ProjectDrawer", {})
 
-autocmd({"VimEnter"}, {
-    group = ProjectDrawer,
-    pattern = "*",
-    command = ":Vexplore",
+autocmd({ "VimEnter" }, {
+	group = ProjectDrawer,
+	pattern = "*",
+	command = ":Vexplore",
 })
-

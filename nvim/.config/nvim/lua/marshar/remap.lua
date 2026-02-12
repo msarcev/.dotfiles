@@ -16,15 +16,15 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- copy clipboard
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>yy", "\"+yy")
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>yy", '"+yy')
 
 -- paste clipboard
-vim.keymap.set("n", "<leader>p", "\"+p")
-vim.keymap.set("n", "<leader>P", "\"+P")
-vim.keymap.set("v", "<leader>p", "\"+p")
-vim.keymap.set("v", "<leader>P", "\"+P")
+vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("n", "<leader>P", '"+P')
+vim.keymap.set("v", "<leader>p", '"+p')
+vim.keymap.set("v", "<leader>P", '"+P')
 
 -- Moving text
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

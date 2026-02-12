@@ -35,12 +35,12 @@ vim.opt.conceallevel = 2
 
 -- Configure Neoformat for Rust
 local neoformat_rust_rustfmt = {
-    exe = 'rustfmt',
-    args = {'--emit=stdout', '--edition', '2021'},
-    stdin = 1
+	exe = "rustfmt",
+	args = { "--emit=stdout", "--edition", "2021" },
+	stdin = 1,
 }
 -- Enable Neoformat for Rust files
-vim.g.neoformat_enabled_rust = {'rustfmt'}
+vim.g.neoformat_enabled_rust = { "rustfmt" }
 -- Set the Neoformat configuration for Rust
 vim.g.neoformat_rust_rustfmt = neoformat_rust_rustfmt
 -- Enable Neoformat debug logging
