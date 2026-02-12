@@ -35,10 +35,34 @@ return {
 
   -- Formatter
   {
-    "sbdchd/neoformat",
-    cmd = "Neoformat",
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
     keys = {
-      { "<leader>m", ":Neoformat<CR>", mode = { "n", "v" }, desc = "Format" },
+      {
+        "<leader>m",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = { "n", "v" },
+        desc = "Format",
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+        json = { "prettierd", "prettier", stop_after_first = true },
+        yaml = { "prettierd", "prettier", stop_after_first = true },
+        markdown = { "prettierd", "prettier", stop_after_first = true },
+        html = { "prettierd", "prettier", stop_after_first = true },
+        css = { "prettierd", "prettier", stop_after_first = true },
+        lua = { "stylua" },
+        rust = { "rustfmt" },
+        python = { "black" },
+      },
     },
   },
 }
